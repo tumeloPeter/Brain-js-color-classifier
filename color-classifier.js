@@ -26,6 +26,7 @@ const trainingData = [
   { input: hexToRgbNormalized('#0000FF'), output: { whiteText: 1 } }, // Pure Blue background
   { input: hexToRgbNormalized('#121212'), output: { whiteText: 1 } }, // Dark Gray background
   { input: hexToRgbNormalized('#800000'), output: { whiteText: 1 } }, // Maroon background
+  {input: hexToRgbNormalized('#2f4048'), output:{whiteText: 1}},
 
   // Light Backgrounds -> Choose Black Text
   { input: hexToRgbNormalized('#FFFFFF'), output: { blackText: 1 } }, // White background
@@ -38,8 +39,13 @@ const trainingData = [
 console.log('Training network...');
 net.train(trainingData, {
   iterations: 2000, // Number of training cycles
-  errorThresh: 0.005 // Stop training if error drops below this threshold
+  errorThresh: 0.005, // Stop training if error drops below this threshold
+  log: true,
+  logPeriod: 20
 });
+
+const json = net.toJSON();
+console.log(JSON.stringify(json, null, 2));
 
 console.log('Training complete!\n');
 
